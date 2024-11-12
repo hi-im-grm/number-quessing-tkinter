@@ -1,2 +1,34 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+import tkinter
+import customtkinter
+import random
+
+app = customtkinter.CTk()
+app.title("Number Quessing")
+app.geometry("500x300")
+
+#Nagłówek
+label = customtkinter.CTkLabel(app, text="Number Quessing", font=("Bold", 40))
+label.pack(pady="30")
+
+#Odpowiedzi
+def quess():
+        if entry<random_number:
+            label = customtkinter.CTkLabel(app, text="Twoja liczba jest za duża!")
+            label.pack()
+
+#Losowanie liczby
+def random_number():
+    random.randrange(1, 100)
+
+#Zgadywanie
+entry = customtkinter.CTkEntry(app, placeholder_text="Choose number between 1-100", width=200)
+entry.pack()
+
+#Przycisk
+button = customtkinter.CTkButton(app, text="Potwierdź", command=quess)
+button.pack(pady=20)
+
+
+app.mainloop()
