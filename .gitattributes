@@ -1,34 +1,42 @@
-# Auto detect text files and perform LF normalization
-* text=auto
 import tkinter
 import customtkinter
 import random
 
 app = customtkinter.CTk()
-app.title("Number Quessing")
+app.title("Zgadnij Liczbę")
 app.geometry("500x300")
 
-#Nagłówek
-label = customtkinter.CTkLabel(app, text="Number Quessing", font=("Bold", 40))
-label.pack(pady="30")
+# Losowanie liczby
+random_number = random.randint(1, 100)
 
-#Odpowiedzi
-def quess():
-        if entry<random_number:
-            label = customtkinter.CTkLabel(app, text="Twoja liczba jest za duża!")
-            label.pack()
+# Funkcja zgadywania
+def guess():
+    try:
+        user_guess = int(entry.get())
+        label_result.configure(text="")  # Resetowanie tekstu
+        if user_guess < random_number:
+            label_result.configure(text="Twoja liczba jest za mała!")
+        elif user_guess > random_number:
+            label_result.configure(text="Twoja liczba jest za duża!")
+        else:
+            label_result.configure(text="Gratulacje! Trafiłeś!")
+    except ValueError:
+        label_result.configure(text="Wprowadź poprawną liczbę")
 
-#Losowanie liczby
-def random_number():
-    random.randrange(1, 100)
+# Nagłówek
+label_header = customtkinter.CTkLabel(app, text="Zgadnij Liczbę", font=("Bold", 40))
+label_header.pack(pady=30)
 
-#Zgadywanie
-entry = customtkinter.CTkEntry(app, placeholder_text="Choose number between 1-100", width=200)
+# Pole do wprowadzania liczby
+entry = customtkinter.CTkEntry(app, placeholder_text="Wpisz liczbę między 1-100", width=170)
 entry.pack()
 
-#Przycisk
-button = customtkinter.CTkButton(app, text="Potwierdź", command=quess)
+# Przycisk
+button = customtkinter.CTkButton(app, text="Potwierdź", command=guess)
 button.pack(pady=20)
 
+# Wynik
+label_result = customtkinter.CTkLabel(app, text="", font=("Bold", 15))
+label_result.pack(pady=20)
 
 app.mainloop()
